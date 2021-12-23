@@ -1,0 +1,818 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="triki">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>ESP32 BLE Room Presence with HomeAssistant - ikirt.github.io</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ikirt.github.io" class="md-header__button md-logo" aria-label="ikirt.github.io" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ikirt.github.io
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ESP32 BLE Room Presence with HomeAssistant
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ikirt.github.io" class="md-nav__button md-logo" aria-label="ikirt.github.io" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    ikirt.github.io
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to MkDocs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          3D
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="3D" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          3D
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3D/2021-04-06-my-haribo/" class="md-nav__link">
+        3D printing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Hackerone
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Hackerone" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Hackerone
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackerone/2020-04-08-petshop-pro/" class="md-nav__link">
+        PetShop Pro Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackerone/2020-04-08-thermostat/" class="md-nav__link">
+        H1 Thermostat Write-up
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Htb
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Htb" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Htb
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2019-10-20-postman/" class="md-nav__link">
+        Postman Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2019-11-10-traverxec/" class="md-nav__link">
+        Traverxec Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-03-18-traceback/" class="md-nav__link">
+        Traceback Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-06-16-htb-oh-my-zsh-theme/" class="md-nav__link">
+        oh-my-zsh htb theme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-07-12-blunder/" class="md-nav__link">
+        Blunder Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-07-16-tabby/" class="md-nav__link">
+        Tabby Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-07-19-admirer/" class="md-nav__link">
+        Admirer Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-08-05-buff/" class="md-nav__link">
+        Buff Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-09-10-doctor/" class="md-nav__link">
+        Doctor Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-09-20-omni/" class="md-nav__link">
+        Omni Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2020-12-16-academy/" class="md-nav__link">
+        Academy Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2021-03-22-scriptkiddie/" class="md-nav__link">
+        ScriptKiddie Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../htb/2021-05-07-spectra/" class="md-nav__link">
+        Spectra Write-up
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Mc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Mc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Mc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ESP32 BLE Room Presence with HomeAssistant
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>ESP32 BLE Room Presence with HomeAssistant</h1>
+
+<p>I have been using HomeAssistant for a couple years now to automate some smalls things in my life. One of the automations was to turn off my PC monitors and office lights when I wasn't in the room. I started off with a Hue motion sensor which worked well, until I don't move for a duration of time and the lights go off. Very annoying !! Recently I came across this project called ESP32-mqtt-room(https://jptrsn.github.io/ESP32-mqtt-room).</p>
+<p>Diving in, I dug out 3 ESP32 boards I had(one for office and one for mancave), and programmed the project to my first board to be the BLE receiver for my Office. </p>
+<p>Flashing the firmware was straight forward,I used VSCode with PlatformIO to program the EPS32, but first I had to modify the Settings.h file with my wifi SSID and passphrase along with some MQTT parameters.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//Replace with your Wifi SSID; example: #define ssid &quot;MyWifi&quot;</span>
+<span class="cp">#define ssid &quot;$SSID$&quot;</span>
+
+<span class="c1">//Replace with your Wifi password; example: #define password &quot;12345678&quot;</span>
+<span class="cp">#define password &quot;$PASS$&quot;</span>
+
+<span class="c1">//Replace with a human-friendly host name. Must not contain spaces or special characters and be unique on your network</span>
+<span class="cp">#define hostname &quot;OfficePresence&quot;</span>
+
+<span class="c1">//Replace with your MQTT Broker address; example: #define mqttHost IPAddress(192, 168, 1, 195)</span>
+<span class="cp">#define mqttHost IPAddress(10 10, 10, 24)</span>
+
+<span class="c1">//Replace with your MQTT Broker port; example: #define mqttPort 1883</span>
+<span class="cp">#define mqttPort 1883</span>
+
+<span class="c1">//Replace with your MQTT Broker user; example: #define mqttUser &quot;homeassistant&quot;</span>
+<span class="cp">#define mqttUser &quot;$MQTT_USER$&quot;</span>
+
+<span class="c1">//Replace with your MQTT Broker password; example: #define mqttPassword &quot;12345678&quot;</span>
+<span class="cp">#define mqttPassword &quot;$MQTT_PASS$&quot;</span>
+
+<span class="c1">//Replace with the room name where the node will be placed; example: #define room &quot;living-room&quot;</span>
+<span class="cp">#define room &quot;Office&quot;</span>
+
+<span class="c1">//Specify the LED pin. For most dev boards, this is GPIO2</span>
+<span class="cp">#define LED_BUILTIN 2</span>
+
+<span class="c1">// Logic level for turning the led on. Most boards use active low, meaning LED_ON should be set to 0</span>
+<span class="cp">#define LED_ON 0</span>
+
+<span class="c1">//Define the base topic for room detection. Usually &quot;room_presence&quot;</span>
+<span class="cp">#define channel &quot;room_presence&quot;</span>
+
+<span class="c1">//Define the topic for publishing availability</span>
+<span class="cp">#define availabilityTopic &quot;presence_nodes/&quot; room</span>
+
+<span class="c1">//Define the topic for publishing JSON attributes</span>
+<span class="cp">#define telemetryTopic &quot;presence_nodes/&quot; hostname &quot;/tele&quot;</span>
+
+<span class="c1">// Define bluetooth scan parameters</span>
+<span class="cp">#define scanInterval 5 </span><span class="c1">// Define the interval in seconds between scans</span>
+<span class="cp">#define singleScanTime 5 </span><span class="c1">// Define the duration of a single scan in seconds</span>
+<span class="cp">#define activeScan true </span><span class="c1">// Active scan uses more power, but get results faster</span>
+<span class="cp">#define bleScanInterval 0x80 </span><span class="c1">// Used to determine antenna sharing between Bluetooth and WiFi. Do not modify unless you are confident you know what you&#39;re doing</span>
+<span class="cp">#define bleScanWindow 0x10 </span><span class="c1">// Used to determine antenna sharing between Bluetooth and WiFi. Do not modify unless you are confident you know what you&#39;re doing</span>
+
+<span class="c1">// Maximum distance (in meters) to report. Devices that are calculated to be further than this distance in meters will not be reported</span>
+<span class="cp">#define maxDistance 2</span>
+
+<span class="c1">// MQTT topic for sensor values from HTU21D temperature and humidity sensor</span>
+<span class="c1">//#define htuSensorTopic &quot;presence_nodes/&quot; hostname &quot;/sensor&quot;</span>
+</code></pre></div>
+<p>Next I added this sensor to HomeAsssitant to make sure it sees the BLE receiver which it does. Now I need a iBeacon transmitter. As the project page suggests a couple options like installing an Android app to act as a iBeacon, I found Android ended up killing the background process and I lost connection. I decided to use one of the ESP32's as a iBeacon.
+Looking through the example code in the Arduino IDE, I found one called <strong>BLE iBeacon</strong>. </p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm">   Based on Neil Kolban example for IDF: https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/tests/BLE%20Tests/SampleScan.cpp</span>
+<span class="cm">   Ported to Arduino ESP32 by pcbreflux</span>
+<span class="cm">*/</span><span class="w"></span>
+
+
+<span class="cm">/*</span>
+<span class="cm">   Create a BLE server that will send periodic iBeacon frames.</span>
+<span class="cm">   The design of creating the BLE server is:</span>
+<span class="cm">   1. Create a BLE Server</span>
+<span class="cm">   2. Create advertising data</span>
+<span class="cm">   3. Start advertising.</span>
+<span class="cm">   4. wait</span>
+<span class="cm">   5. Stop advertising.</span>
+<span class="cm">   6. deep sleep</span>
+
+<span class="cm">*/</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;sys/time.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;BLEDevice.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;BLEUtils.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;BLEBeacon.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;BLEServer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;esp_sleep.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;sys/time.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#define GPIO_DEEP_SLEEP_DURATION     10  </span><span class="c1">// sleep x seconds and then wake up</span>
+<span class="n">RTC_DATA_ATTR</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">time_t</span><span class="w"> </span><span class="n">last</span><span class="p">;</span><span class="w">        </span><span class="c1">// remember last boot in RTC Memory</span>
+<span class="n">RTC_DATA_ATTR</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bootcount</span><span class="p">;</span><span class="w"> </span><span class="c1">// remember number of boots in RTC Memory</span>
+
+<span class="cp">#ifdef __cplusplus</span>
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#endif</span>
+
+<span class="kt">uint8_t</span><span class="w"> </span><span class="nf">temprature_sens_read</span><span class="p">();</span><span class="w"></span>
+<span class="c1">//uint8_t g_phyFuns;</span>
+
+<span class="cp">#ifdef __cplusplus</span>
+<span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span>
+
+<span class="c1">// See the following for generating UUIDs:</span>
+<span class="c1">// https://www.uuidgenerator.net/</span>
+<span class="n">BLEAdvertising</span><span class="w"> </span><span class="o">*</span><span class="n">pAdvertising</span><span class="p">;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">timeval</span><span class="w"> </span><span class="n">now</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#define BEACON_UUID           &quot;cfd9353e-3187-4e2e-882e-37a587422830&quot; </span><span class="c1">// UUID 1 128-Bit (may use linux tool uuidgen or random numbers via https://www.uuidgenerator.net/)</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setBeacon</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">BLEBeacon</span><span class="w"> </span><span class="n">oBeacon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BLEBeacon</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setManufacturerId</span><span class="p">(</span><span class="mh">0x4C00</span><span class="p">);</span><span class="w"> </span><span class="c1">// fake Apple 0x004C LSB (ENDIAN_CHANGE_U16!)</span>
+<span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setProximityUUID</span><span class="p">(</span><span class="n">BLEUUID</span><span class="p">(</span><span class="n">BEACON_UUID</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setMajor</span><span class="p">((</span><span class="n">bootcount</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFFFF0000</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setMinor</span><span class="p">(</span><span class="n">bootcount</span><span class="o">&amp;</span><span class="mh">0xFFFF</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">BLEAdvertisementData</span><span class="w"> </span><span class="n">oAdvertisementData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BLEAdvertisementData</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">BLEAdvertisementData</span><span class="w"> </span><span class="n">oScanResponseData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BLEAdvertisementData</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">oAdvertisementData</span><span class="p">.</span><span class="n">setFlags</span><span class="p">(</span><span class="mh">0x04</span><span class="p">);</span><span class="w"> </span><span class="c1">// BR_EDR_NOT_SUPPORTED 0x04</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">strServiceData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">strServiceData</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="mi">26</span><span class="p">;</span><span class="w">     </span><span class="c1">// Len</span>
+<span class="w">  </span><span class="n">strServiceData</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="mh">0xFF</span><span class="p">;</span><span class="w">   </span><span class="c1">// Type</span>
+<span class="w">  </span><span class="n">strServiceData</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">getData</span><span class="p">();</span><span class="w"> </span>
+<span class="w">  </span><span class="n">oAdvertisementData</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="n">strServiceData</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">pAdvertising</span><span class="o">-&gt;</span><span class="n">setAdvertisementData</span><span class="p">(</span><span class="n">oAdvertisementData</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">pAdvertising</span><span class="o">-&gt;</span><span class="n">setScanResponseData</span><span class="p">(</span><span class="n">oScanResponseData</span><span class="p">);</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">now</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;start ESP32 %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">bootcount</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;deep sleep (%lds since last reset, %lds since last boot)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">now</span><span class="p">.</span><span class="n">tv_sec</span><span class="p">,</span><span class="n">now</span><span class="p">.</span><span class="n">tv_sec</span><span class="o">-</span><span class="n">last</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="p">.</span><span class="n">tv_sec</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Create the BLE Device</span>
+<span class="w">  </span><span class="n">BLEDevice</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Create the BLE Server</span>
+<span class="w">  </span><span class="c1">// BLEServer *pServer = BLEDevice::createServer(); // &lt;-- no longer required to instantiate BLEServer, less flash and ram usage</span>
+
+<span class="w">  </span><span class="n">pAdvertising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BLEDevice</span><span class="o">::</span><span class="n">getAdvertising</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">setBeacon</span><span class="p">();</span><span class="w"></span>
+<span class="w">   </span><span class="c1">// Start advertising</span>
+<span class="w">  </span><span class="n">pAdvertising</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Advertizing started...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">pAdvertising</span><span class="o">-&gt;</span><span class="n">stop</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;enter deep sleep</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">esp_deep_sleep</span><span class="p">(</span><span class="mf">1000000L</span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GPIO_DEEP_SLEEP_DURATION</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;in deep sleep</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>I needed to make a couple changes for this to work. First I had to change the BEACON_UUID, I used the unix command <strong>uuidgen</strong> to create a random UUID. That was pretty much it at first.  After some testing I noticed the sensor wasn't seen after first time. Loading up an Android App called <strong>nRF Connect</strong>(this allows you to view nearby bluetooth beacons), I noticed that the minor ID was changing on every update. Looking at the arduino example code, I modified the following:</p>
+<p>Before
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setMajor</span><span class="p">((</span><span class="n">bootcount</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFFFF0000</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setMinor</span><span class="p">(</span><span class="n">bootcount</span><span class="o">&amp;</span><span class="mh">0xFFFF</span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="err">```</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">After</span><span class="w"></span>
+<span class="w">  </span><span class="err">```</span><span class="n">C</span><span class="o">++</span><span class="w"></span>
+<span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setMajor</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">oBeacon</span><span class="p">.</span><span class="n">setMinor</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+</code></pre></div></p>
+<p>This statically sets the Major and Minor versions which you have to use in HomeAssistant in the device_id. Next I programmed a second recevier to put in my mancave, I would like to control the light in that room with my presence as well. Last step is to write some new flows in Node-Red to create the light automation based on BLE presence apposed to motion detection. </p>
+<p><img alt="HomeAssistant" src="/images/mc/esp32-ha-presence.png" /></p>
+<p><img alt="HomeAssistant" src="/images/mc/3_Hours_Later_Sponge_Bob.jpg" /></p>
+<p>After further testing, I found the <strong>BeaconScope</strong> Android app to be reliable after disabling <strong>Power Saver</strong> in Android battery Settings.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../htb/2021-05-07-spectra/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Spectra Write-up" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Spectra Write-up
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>

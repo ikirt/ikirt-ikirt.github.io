@@ -1,0 +1,764 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="triki">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.5">
+    
+    
+      
+        <title>Admirer Write-up - ikirt.github.io</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a617204b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ikirt.github.io" class="md-header__button md-logo" aria-label="ikirt.github.io" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ikirt.github.io
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Admirer Write-up
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ikirt.github.io" class="md-nav__button md-logo" aria-label="ikirt.github.io" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    ikirt.github.io
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to MkDocs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          3D
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="3D" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          3D
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3D/2021-04-06-my-haribo/" class="md-nav__link">
+        3D printing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Hackerone
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Hackerone" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Hackerone
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackerone/2020-04-08-petshop-pro/" class="md-nav__link">
+        PetShop Pro Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hackerone/2020-04-08-thermostat/" class="md-nav__link">
+        H1 Thermostat Write-up
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Htb
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Htb" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Htb
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-10-20-postman/" class="md-nav__link">
+        Postman Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-11-10-traverxec/" class="md-nav__link">
+        Traverxec Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-03-18-traceback/" class="md-nav__link">
+        Traceback Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-06-16-htb-oh-my-zsh-theme/" class="md-nav__link">
+        oh-my-zsh htb theme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-12-blunder/" class="md-nav__link">
+        Blunder Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-16-tabby/" class="md-nav__link">
+        Tabby Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Admirer Write-up
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-08-05-buff/" class="md-nav__link">
+        Buff Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-09-10-doctor/" class="md-nav__link">
+        Doctor Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-09-20-omni/" class="md-nav__link">
+        Omni Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-12-16-academy/" class="md-nav__link">
+        Academy Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-03-22-scriptkiddie/" class="md-nav__link">
+        ScriptKiddie Write-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-05-07-spectra/" class="md-nav__link">
+        Spectra Write-up
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Mc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Mc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Mc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mc/2020-04-19-esp32-presence-ha/" class="md-nav__link">
+        ESP32 BLE Room Presence with HomeAssistant
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>Admirer Write-up</h1>
+
+<p>Admirer was just retired, here is my write-up on how I worked my way through this box.</p>
+<p>Enumerating the ports on the host, I see the following:</p>
+<p><div class="highlight"><pre><span></span><code>PORT   STATE SERVICE REASON         VERSION
+21/tcp open  ftp     syn-ack ttl 63 vsftpd 3.0.3
+22/tcp open  ssh     syn-ack ttl 63 OpenSSH 7.4p1 Debian 10+deb9u7 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 4a:71:e9:21:63:69:9d:cb:dd:84:02:1a:23:97:e1:b9 (RSA)
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaQHjxkc8zeXPgI5C7066uFJaB6EjvTGDEwbfl0cwM95npP9G8icv1F/YQgKxqqcGzl+pVaAybRnQxiZkrZHbnJlMzUzNTxxI5cy+7W0dRZN4VH4YjkXFrZRw6dx/5L1wP4qLtdQ0tLHmgzwJZO+111mrAGXMt0G+SCnQ30U7vp95EtIC0gbiGDx0dDVgMeg43+LkzWG+Nj+mQ5KCQBjDLFaZXwCp5Pqfrpf3AmERjoFHIE8Df4QO3lKT9Ov1HWcnfFuqSH/pl5+m83ecQGS1uxAaokNfn9Nkg12dZP1JSk+Tt28VrpOZDKhVvAQhXWONMTyuRJmVg/hnrSfxTwbM9
+|   256 c5:95:b6:21:4d:46:a4:25:55:7a:87:3e:19:a8:e7:02 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNHgxoAB6NHTQnBo+/MqdfMsEet9jVzP94okTOAWWMpWkWkT+X4EEWRzlxZKwb/dnt99LS8WNZkR0P9HQxMcIII=
+|   256 d0:2d:dd:d0:5c:42:f8:7b:31:5a:be:57:c4:a9:a7:56 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBqp21lADoWZ+184z0m9zCpORbmmngq+h498H9JVf7kP
+80/tcp open  http    syn-ack ttl 63 Apache httpd 2.4.25 ((Debian))
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| http-robots.txt: 1 disallowed entry 
+|_/admin-dir
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Admirer
+</code></pre></div>
+Testing port 21 for anonymous login failed, looks like I need some credentials.</p>
+<p>Checking out what is on port 80 I see the following page with a bunch of pictures.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-home-page.png" /></p>
+<p>Checking for <strong>robots.txt</strong> I see the following.
+<div class="highlight"><pre><span></span><code>User-agent: *
+
+# This folder contains personal contacts and creds, so no one -not even robots- should see it - waldo
+Disallow: /admin-dir
+</code></pre></div></p>
+<p>Well, well well, a hidden folder, what can we do with this ? Wonder what wfuzz can find.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-wfuzz-1.png" /></p>
+<p>Looks like I found some important files I was not supposed to, what is in them ?</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-contacts.png" />
+<img alt="MainPage" src="/images/admirer/admirer-credentials.png" /></p>
+<p>Now I have some credentials, where the heck do I use them, so far I haven't found a login page, but in the credentials there is mention of <strong>wordpress</strong>, ok I need to fuzz more, this time for <strong>php</strong> files. Oh ya, almost forgot about my friend listening on port 21, looks like one of the creds are for <strong>FTP</strong></p>
+<p><img alt="MainPage" src="/images/admirer/admirer-ftp-1.png" /></p>
+<p>Oh boy, looks like something juicy!</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-ftp-2.png" /></p>
+<p>extracting the html backup I can see everything that was hidden and can access those files locally. The index.php
+inside the archive contained creds.
+<div class="highlight"><pre><span></span><code>$servername = &quot;localhost&quot;;
+$username = &quot;waldo&quot;;
+$password = &quot;]F7jLHw:*G&gt;UPrTo}~A&quot;d6b&quot;;
+$dbname = &quot;admirerdb&quot;;
+</code></pre></div>
+Trying these credentials against FTP and SSH fail :(</p>
+<p>From the extracted archive I can see the hidden files.</p>
+<div class="highlight"><pre><span></span><code>./utility-scripts/phptest.php
+./utility-scripts/info.php
+./utility-scripts/db_admin.php
+./utility-scripts/admin_tasks.php
+./w4ld0s_s3cr3t_d1r/credentials.txt
+./w4ld0s_s3cr3t_d1r/contacts.txt
+</code></pre></div>
+<p>Poking through those files doesn't give me anything useful :(</p>
+<p>Back to fuzzing..</p>
+<p><img alt="MainPage" src="/images/admirer/fuzzagainidareyou.jpg" /></p>
+<p><img alt="MainPage" src="/images/admirer/admirer-wfuzz-2.png" /></p>
+<p>Found a page called <strong>admirer.php</strong>, lets see what it looks like.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-adminer-login.png" /></p>
+<p>Googling for a vulnerability I came across this article, https://medium.com/bugbountywriteup/adminer-script-results-to-pwning-server-private-bug-bounty-program-fe6d8a43fe6f</p>
+<p>This requires me to setup a <strong>mysql</strong> server somewhere I control, setup a user and password to allow a remote connection. Then login to <strong>adminer</strong> with my server credentials.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-adminer-exploit.png" /></p>
+<p><img alt="MainPage" src="/images/admirer/admirer-adminer-exploited.png" /></p>
+<p>Ok now I'm in this interface, now how can I get a shell.. Googling comes up with this https://medium.com/bugbountywriteup/adminer-script-results-to-pwning-server-private-bug-bounty-program-fe6d8a43fe6f</p>
+<p>Looks like I can use <strong>LOAD DATA LOCAL INFILE</strong> to read from the local filesystem into my database :)
+Now the fun part, finding the correct path...</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-sql-exploit-1.png" /></p>
+<p>Looks like there are some path restrictions here, lets see what I do have access to.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-sql-exploit-2.png" /></p>
+<p>Ok, <strong>/var/www/html</strong> looks like a place I can play with. So I previously found a password in the <strong>index.php</strong> backup I grabbed from the ftp. That password didn't work, I wonder if it was changed recently.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-sql-exploit-3.png" /></p>
+<p>Looking at my database table <strong>mysql.user</strong> I see a new entry containing the <strong>index.php</strong> code.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-sql-exploit-4.png" /></p>
+<p>This password DOES look different, trying all the different usernames against the password came back with a success with <strong>waldo</strong>.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-user-flag.png" /></p>
+<p>SUCCESS, got user flag. Now for the fun part, privilege escalation.
+When I get onto a Linux host, I check to see if I have any <strong>sudo</strong> privileges.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-waldo-sudo.png" /></p>
+<p>In the <strong>admin_tasks.sh</strong> there is this function which calls a python script in the same <strong>/opt/scripts/</strong> folder.
+<div class="highlight"><pre><span></span><code>backup_web<span class="o">()</span>                                                                                                                                
+<span class="o">{</span>                                                                                                                                           
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$EUID</span><span class="s2">&quot;</span> -eq <span class="m">0</span> <span class="o">]</span>                                                                                                                    
+    <span class="k">then</span>                                                                                                                                    
+        <span class="nb">echo</span> <span class="s2">&quot;Running backup script in the background, it might take a while...&quot;</span>                                                            
+        /opt/scripts/backup.py <span class="p">&amp;</span>                                                                                                            
+    <span class="k">else</span>                                                                                                                                    
+        <span class="nb">echo</span> <span class="s2">&quot;Insufficient privileges to perform the selected operation.&quot;</span>                                                                   
+    <span class="k">fi</span>                                                                                                                                      
+<span class="o">}</span>  
+</code></pre></div></p>
+<p>Looking at the file <strong>/opt/scripts/backup.py</strong></p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/python3                                                                                           </span>
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">make_archive</span>
+
+<span class="n">src</span> <span class="o">=</span> <span class="s1">&#39;/var/www/html/&#39;</span>                                                      
+<span class="c1"># old ftp directory, not used anymore                                       </span>
+<span class="c1">#dst = &#39;/srv/ftp/html&#39;                                                                 </span>
+<span class="n">dst</span> <span class="o">=</span> <span class="s1">&#39;/var/backups/html&#39;</span>                                                           
+<span class="n">make_archive</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="s1">&#39;gztar&#39;</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span> 
+</code></pre></div>
+<p>Ok, looks like a simple script that calls a library <strong>shutils</strong> and uses it to backup the html folder. Googling for <strong>python library privilege escalation</strong> comes back with this, https://rastating.github.io/privilege-escalation-via-python-library-hijacking/
+Looks like I can poison the python library path by adding my own path with the PYTHONPATH environment variable(https://www.tutorialspoint.com/What-is-PYTHONPATH-environment-variable-in-Python).</p>
+<p>I will start with creating a file called <strong>shutil.py</strong> in <strong>/dev/shm/</strong> with a python reverse shell inside a function called <strong>make_archive</strong></p>
+<p><img alt="MainPage" src="/images/admirer/admirer-my-shutil.png" /></p>
+<p>Now I can execute the script with sudo which will call the backup.py and that will use MY shutil.py module when I update the <strong>PYTHONPATH</strong> variable. Before I do that I need to have a <strong>nc</strong> listener waiting for the connection.</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-root-shell.png" /></p>
+<p>There is a connection home, now to get a proper shell and check for root.txt</p>
+<p><img alt="MainPage" src="/images/admirer/admirer-root.png" /></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../2020-07-16-tabby/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tabby Write-up" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Tabby Write-up
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../2020-08-05-buff/" class="md-footer__link md-footer__link--next" aria-label="Next: Buff Write-up" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Buff Write-up
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f8ea78.min.js"></script>
+      
+    
+  </body>
+</html>
