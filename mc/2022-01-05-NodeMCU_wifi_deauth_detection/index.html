@@ -15,7 +15,7 @@
     
     
       
-        <title>H1 Thermostat Write-up - ikirt.github.io</title>
+        <title>Wifi Deauth Dectection with NodeMCU - ikirt.github.io</title>
       
     
     
@@ -63,11 +63,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#difficulty-easy" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -97,7 +92,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              H1 Thermostat Write-up
+              Wifi Deauth Dectection with NodeMCU
             
           </span>
         </div>
@@ -558,14 +553,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
       
       
@@ -588,7 +581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2020-04-08-petshop-pro/" class="md-nav__link">
+      <a href="../../hackerone/2020-04-08-petshop-pro/" class="md-nav__link">
         PetShop Pro Write-up
       </a>
     </li>
@@ -600,21 +593,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../hackerone/2020-04-08-thermostat/" class="md-nav__link">
         H1 Thermostat Write-up
       </a>
-      
     </li>
   
 
@@ -632,12 +615,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
       
       
       
@@ -660,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mc/2020-04-19-esp32-presence-ha/" class="md-nav__link">
+      <a href="../2020-04-19-esp32-presence-ha/" class="md-nav__link">
         ESP32 BLE Room Presence with HomeAssistant
       </a>
     </li>
@@ -672,11 +657,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../mc/2022-01-05-NodeMCU_wifi_deauth_detection/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Wifi Deauth Dectection with NodeMCU
       </a>
+      
     </li>
   
 
@@ -695,72 +688,15 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
 
-<h1 id="difficulty-easy">Difficulty (easy)</h1>
-<p>This challenge starts off with downloading an APK file.</p>
-<p><img alt="HomePage" src="/images/petshoppro/thermostat-1.png" /></p>
-<p><img alt="HomePage" src="/images/petshoppro/thermostat-2.png" /></p>
-<p>After downloading the file, I decided to extract it with apktool.</p>
-<p>An APK file is a glorified ZIP file, some can just be unzipped but others APKs have been obfuscated, so there is where apktool comes to the rescue.</p>
-<p><div class="highlight"><pre><span></span><code>$ apktool d thermostat.apk
-</code></pre></div>
-Results will be a folder called thermostat with the following contents.</p>
-<p><div class="highlight"><pre><span></span><code>-rw-r--r--   <span class="m">1</span> triki triki <span class="m">1263</span> Mar  <span class="m">9</span> <span class="m">17</span>:19 AndroidManifest.xml
-drwxr-xr-x <span class="m">136</span> triki triki <span class="m">4096</span> Mar  <span class="m">9</span> <span class="m">17</span>:19 res
-drwxr-xr-x   <span class="m">6</span> triki triki <span class="m">4096</span> Mar  <span class="m">9</span> <span class="m">17</span>:19 smali
-drwxr-xr-x   <span class="m">3</span> triki triki <span class="m">4096</span> Mar  <span class="m">9</span> <span class="m">17</span>:19 original
--rw-r--r--   <span class="m">1</span> triki triki <span class="m">9099</span> Mar  <span class="m">9</span> <span class="m">17</span>:19 apktool.yml
-</code></pre></div>
-This one I cheated, I know that I'm looking for a string with the text <sup>FLAG</sup> prepended to it, so I just used grep.</p>
-<div class="highlight"><pre><span></span><code>triki@kalima:~/Downloads/tmp/thermostat » grep -r <span class="s1">&#39;\^FLAG\^&#39;</span> *
-smali/com/hacker101/level11/PayloadRequest.smali:    const-string v0, <span class="s2">&quot;^FLAG^4299765e023b2ce0b86427fa5c0f4d9a543e444525529b3739da63f0c19c2aca</span><span class="nv">$FLAG</span>$<span class="s2">&quot;</span>
-smali/com/hacker101/level11/PayloadRequest.smali:    const-string v0, <span class="s2">&quot;^FLAG^856cd8bfe1105b9464115b1888982bfe35bd1d99aa3ff84f46b270f7a16a3810</span><span class="nv">$FLAG</span>$<span class="s2">&quot;</span>
-</code></pre></div>
-<p>But let's go through this properly.</p>
-<p>The Hints for these flags are:</p>
-<p>Flag0 -- Found</p>
-<div class="highlight"><pre><span></span><code>Communication is key
-Have you looked at what the app is sending to the server?
-</code></pre></div>
-<p>Flag1 -- Found</p>
-<div class="highlight"><pre><span></span><code>Doesn&#39;t the MAC seem interesting?
-Access to the source code would help
-Check out the Android Quickstart video from Hacker101
-</code></pre></div>
-<p>I loaded this APK into Android Studio Emulator for to see what this app is all about.</p>
-<p><img alt="HomePage" src="/images/petshoppro/thermostat-3.png" /></p>
-<p>Next I set the emulator to use my local burp proxy to capture traffic.</p>
-<p><img alt="HomePage" src="/images/petshoppro/thermostat-4.png" /></p>
-<p>FLAG #0 done.</p>
-<p>Looking at the http request captured I notice the X-MAC has a base64 encoded string. Decoding this gave me the following:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;pByDNlcfSFXha5P/t9zNLg==&#39;</span> <span class="p">|</span> base64 -d
-6WHUk.%                                                      
-</code></pre></div>
-<p>When I grep for 'X-MAC' it appears in a file called 'PayloadRequest.smali'. Looking through that file for X-MAC I find the other FLAG.</p>
-<p>FLAG #1 done.</p>
+  <h1>Wifi Deauth Dectection with NodeMCU</h1>
+
+<p>One day, I was having a conversation about how insecure wifi is and how easily the deauth attack could happen.</p>
 
   <hr>
 <div class="md-source-file">
@@ -785,7 +721,7 @@ Check out the Android Quickstart video from Hacker101
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../2020-04-08-petshop-pro/" class="md-footer__link md-footer__link--prev" aria-label="Previous: PetShop Pro Write-up" rel="prev">
+        <a href="../2020-04-19-esp32-presence-ha/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ESP32 BLE Room Presence with HomeAssistant" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -794,26 +730,11 @@ Check out the Android Quickstart video from Hacker101
               <span class="md-footer__direction">
                 Previous
               </span>
-              PetShop Pro Write-up
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../../mc/2020-04-19-esp32-presence-ha/" class="md-footer__link md-footer__link--next" aria-label="Next: ESP32 BLE Room Presence with HomeAssistant" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
               ESP32 BLE Room Presence with HomeAssistant
             </div>
           </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
         </a>
+      
       
     </nav>
   
