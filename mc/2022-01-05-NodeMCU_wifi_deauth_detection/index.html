@@ -26,7 +26,7 @@
         
           
           
-          <meta name="theme-color" content="#8bc34b">
+          <meta name="theme-color" content="#00bdd6">
         
       
     
@@ -54,7 +54,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="green">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="yellow">
   
     
     
@@ -629,6 +629,68 @@
 
   
   
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          iOS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="iOS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          iOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iOS/2022-02-11-Ipad2-jailbreak/" class="md-nav__link">
+        Ipad 2 Jailbreak
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iOS/2022-03-12-hackintosh/" class="md-nav__link">
+        Hackintosh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -636,18 +698,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           Mc
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Mc" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Mc
         </label>
@@ -710,7 +772,10 @@
 
   <h1>Wifi Deauth Dectection with NodeMCU</h1>
 
-<p>One day, I was having a conversation about how insecure wifi is and how easily the deauth attack could happen.</p>
+<p>One day, I was having a conversation about how insecure wifi is and how easily the deauth attack could happen.
+I did some Googling and found a project that uses a nodeMCU to scan for wifi reset packets and found, <a href="https://github.com/HakCat-Tech/HaxxDetector">HaxxDetector</a>.
+I then wrote a python script to connect to the serial interface of the nodeMCU and pull the detection count and write it to a CSV file to be imported into Splunk.
+Project is still WIP as I need to design and print a nice case for this.</p>
 
   <hr>
 <div class="md-source-file">
